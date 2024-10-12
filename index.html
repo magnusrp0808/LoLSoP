@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Magnus">
+    <title>League of Legends - Smash or Pass</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/site.css" rel="stylesheet">
+    <script src="./js/jquery-3.7.1.min.js"></script> 
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">League of Legends - Smash or Pass</a>
+        <fieldset class="p-2 ms-auto">
+          <span>Seed:</span>
+          <span id="seed-display"></span>
+        </fieldset>
+        <button id="save-btn" class="btn btn-success d-none" onclick="createSaveFile()">Save</button>    
+      </div>
+    </nav>
+    <main class="container">
+      <div class="p-3">
+        <h1>( ͡~ ͜ʖ ͡°)</h1>
+        <p>Which champion is your favorite? Which one are you gonna <b>SMASH</b>!!</p>
+        <div id="main-menu">
+          <button class="btn btn-primary" onclick="startGame()">Start</button>
+          <fieldset>
+            <legend>Options:</legend>      
+            <div>
+              <input type="checkbox" id="include-males" name="include-males" onchange="options.include_male_champions = $(this).is(':checked')" checked />
+              <label for="include-males">Include males</label>
+            </div>       
+            <div>
+              <input type="checkbox" id="include-females" name="include-females" onchange="options.include_female_champions = $(this).is(':checked')" checked />
+              <label for="include-females">Include females</label>
+            </div>
+            <div>
+              <input type="checkbox" id="include-illegal" name="include-illegal" onchange="options.include_illegal_champions = $(this).is(':checked')"/>
+              <label for="include-illegal">Include illegal</label>
+            </div>
+            <div class="py-2">
+              <label class="fw-bold">Seed</label>
+              <input type="text" id="seed" />
+            </div>
+          </fieldset>
+        </div>
+        <div id="saveload" class="py-2">
+          <fieldset>
+            <div id="load-game">
+              <label class="fw-bold">Load</label>
+              <input type="file" onchange="loadSaveFile(this.files[0])"></input>
+            </div>
+          </fieldset>
+        </div>
+        <div id="loading-champions" class="d-none">Loading champions...</div>
+        <div id="champions-div" class="row d-none">
+          <div class="col text-center">
+              <img id="left-img-placeholder" src="./assets/loading.png" class="d-none" />
+              <img id="left-img" src="" onclick="showChampionSplash(currentLeftChamp)" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+              <br />
+              <div class="row pt-2">
+                <span id="left-name" class="fw-bold fs-5"></span>
+              </div>
+              <div class="row pt-2 d-flex justify-content-center">
+                <button class="smash-button btn btn-primary w-auto" onclick="chooseLeft()">SMASH!</button>
+              </div>
+          </div>
+          <div id="or-div" class="col-auto d-flex align-items-center">
+              <span class="fw-bold fs-3">OR</span>
+          </div>
+          <div id="right-champion" class="col text-center">
+            <img id="right-img-placeholder" src="./assets/loading.png" class="d-none" />
+            <img id="right-img" src="" onclick="showChampionSplash(currentRightChamp)" data-bs-toggle="modal" data-bs-target="#exampleModal" />
+            <br />
+            <div class="row pt-2">
+              <span id="right-name" class="fw-bold fs-5"></span>
+            </div>
+            <div class="row pt-2 d-flex justify-content-center">
+              <button class="smash-button btn btn-primary w-auto" onclick="chooseRight()">SMASH!</button>
+            </div>
+          </div>
+          <div id="smash-champion" class="col d-none">
+            <span>Damn you really like this champion! TIME TO SMASH <span id="smash-champion-name" class="fw-bold"></span></span>
+          </div>
+        </div>
+      </div>
+      <footer class="mt-3 text-body-secondary border-top">
+        This is not endorsed by Riot Games and does not reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
+      </footer>
+    </main>
+  </body>    
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog mw-100 d-flex justify-content-center">
+      <div class="modal-content" style="max-width: fit-content;">
+        <img id="splash-img" class="mw-100" src="" data-bs-dismiss="modal"></img>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="./assets/female_champions.js"></script> 
+  <script src="./assets/male_champions.js"></script> 
+  <script src="./assets/illegal_champions.js"></script> 
+  <script src="./js/passorsmash.js"></script> 
+</html>

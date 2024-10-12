@@ -1,0 +1,16 @@
+html {
+    --primary-color: #2f1847;
+    --primary-color-rgb: 47, 24, 71;
+    --bs-body-bg: color(black) !important;
+    --bs-tertiary-bg: color(black) !important;
+    --bs-tertiary-bg-rgb: 203, 247, 237 !important;
+}
+
+body {
+    color:gold;
+    background-color: black;
+}
+
+.navbar {
+    background: linear-gradient(180deg, rgba(153,142,0,1) 0%, rgba(59,55,0,1) 80%, rgba(0,0,0,1) 100%);
+}
