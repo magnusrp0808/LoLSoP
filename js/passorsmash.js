@@ -23,9 +23,7 @@ $("#left-img").on("load", () => {
     $("#left-name").html(currentLeftChamp.name);
     toggleLeftChampion(true);
     updateSmashButtons();
-});
-
-$("#left-img").on("error", () => {
+}).on("error", () => {
     if(possible_champions.length > 0){
         chooseRight();
     }
@@ -35,9 +33,7 @@ $("#right-img").on("load", () => {
     $("#right-name").html(currentRightChamp.name);
     toggleRightChampion(true);
     updateSmashButtons();
-});
-
-$("#right-img").on("error", () => {
+}).on("error", () => {
     if(possible_champions.length > 0){
         chooseLeft();
     }
@@ -362,4 +358,7 @@ function preloadChampionImage(champion) {
 
     var img=new Image();
     img.src=`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.skin}.jpg`;
+
+    var splashImg=new Image();
+    splashImg.src=`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.skin}.jpg`;
 }
