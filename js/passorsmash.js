@@ -65,6 +65,7 @@ function startGame(){
     ) {
         $("#champions-div").html("What is wrong with you? Why would you not select any champions to include?! Go away...");
         showChampions();
+        $("#save-btn").toggleClass("d-none", true);
         return;
     }
 
