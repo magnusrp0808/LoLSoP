@@ -13,7 +13,7 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">League of Legends - Smash or Pass</a>
+        <a class="navbar-brand" href="#" onclick="location.reload(true);">League of Legends - Smash or Pass</a>
         <fieldset class="p-2 ms-auto">
           <span>Seed:</span>
           <span id="seed-display"></span>
@@ -30,9 +30,17 @@
           <fieldset>
             <legend>Options:</legend>    
             <div>
-              <input type="checkbox" id="include-all-skins" name="include-all-skins" onchange="options.include_all_skins = $(this).is(':checked')" checked/>
+              <input type="radio" id="include-all-skins" name="include-champion-skins" value="1" onchange="options.include_champion_skins = Number(this.value)" checked/>
               <label for="include-all-skins">Include all skins</label>
-            </div>  
+            </div>
+            <div>
+              <input type="radio" id="include-random-skins" name="include-champion-skins" value="2" onchange="options.include_champion_skins = Number(this.value)"/>
+              <label for="include-random-skins">Include random skin for each champion</label>
+            </div>
+            <div>
+              <input type="radio" id="include-defualt-skins" name="include-champion-skins" value="3" onchange="options.include_champion_skins = Number(this.value)"/>
+              <label for="include-defualt-skins">Include only default skin</label>
+            </div>
             <div>
               <input type="checkbox" id="include-males" name="include-males" onchange="options.include_male_champions = $(this).is(':checked')" checked />
               <label for="include-males">Include males</label>

@@ -3,8 +3,14 @@ var currentRightChamp = null;
 var nextLeftChamp = null;
 var nextRightChamp = null;
 
+const INCLUDE_CHAMPION_TYPE = {
+    ALL: 1,
+    RANDOM: 2,
+    DEFAULT: 3
+}
+
 var options = {
-    include_all_skins: true,
+    include_champion_skins: INCLUDE_CHAMPION_TYPE.ALL,
     include_female_champions: true,
     include_male_champions: true,
     include_illegal_champions: false
@@ -207,7 +213,7 @@ function showChampionSplash(champion) {
 }
 
 function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
+    return Math.floor(random() * max);
 }
 
 async function addSkins(championList){
@@ -228,23 +234,31 @@ async function fetchChampionData(champion){
         }
     
         const json = await response.json();
-        
-        if(options.include_all_skins){
-            return json.data[champion].skins.map(data => {
-                return {
-                    id: champion,
-                    name: data.name == 'default' ? json.data[champion].name : data.name,
-                    skin: `${champion}_${data.num}`,
-                };
-            });
-        } else {
-            return [{
-                id: champion,
-                name: json.data[champion].name,
-                skin: `${champion}_0`,
-            }];
-        }
 
+        switch(options.include_champion_skins) {
+            case INCLUDE_CHAMPION_TYPE.ALL:
+                return json.data[champion].skins.map(data => {
+                    return {
+                        id: champion,
+                        name: data.name == 'default' ? json.data[champion].name : data.name,
+                        skin: `${champion}_${data.num}`,
+                    };
+                });
+            case INCLUDE_CHAMPION_TYPE.RANDOM:
+                let index = getRandomInt(json.data[champion].skins.length);
+                let skin = json.data[champion].skins[index];
+                return [{
+                    id: champion,
+                    name: skin.name == 'default' ? json.data[champion].name : skin.name,
+                    skin: `${champion}_${skin.num}`,
+                }];
+            case INCLUDE_CHAMPION_TYPE.DEFAULT:
+                return [{
+                    id: champion,
+                    name: json.data[champion].name,
+                    skin: `${champion}_0`,
+                }];
+        }
     } catch (error) {
       console.error(error.message);
     }
