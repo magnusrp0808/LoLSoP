@@ -59,6 +59,15 @@ function startGame(){
         promisedSkins.push(addSkins(illegal_champions));
     }
 
+    if(!options.include_female_champions && 
+        !options.include_male_champions &&
+        !options.include_illegal_champions
+    ) {
+        $("#champions-div").html("What is wrong with you? Why would you not select any champions to include?! Go away...");
+        showChampions();
+        return;
+    }
+
     seedInput = $("#seed").val();
     if(seedInput == null || seedInput == ""){
         seedInput = Math.floor(Math.random() * 100000000);
