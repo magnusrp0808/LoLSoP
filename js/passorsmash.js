@@ -109,7 +109,7 @@ function nextRound() {
         chosen_champions = [];
     }
 
-    if(possible_champions.length == 1){
+    if(possible_champions.length == 1 && nextLeftChamp == null && nextRightChamp == null){
         currentLeftChamp = possible_champions[0];
         $("#left-img").attr("src", `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${currentLeftChamp.skin}.jpg`);
         $("#right-champion").toggleClass("d-none", true);
@@ -120,19 +120,33 @@ function nextRound() {
         return;
     }
 
-    if(nextRightChamp == null) {
+    if(nextRightChamp == null && nextLeftChamp == null){
         currentLeftChamp = possible_champions[0];
         currentRightChamp = possible_champions[1];
-        nextLeftChamp = possible_champions[2];
-        nextRightChamp = possible_champions[3];
+        if(possible_champions.length >= 4){
+            nextLeftChamp = possible_champions[2];
+            nextRightChamp = possible_champions[3];
+            possible_champions = possible_champions.splice(4);
+        } else {
+            possible_champions = possible_champions.splice(2);
+        }
+    } else if(nextRightChamp == null) {
+        currentLeftChamp = nextLeftChamp;
+        currentRightChamp = possible_champions[0];
 
-        possible_champions = possible_champions.splice(4);
+        nextLeftChamp = null;
+        nextRightChamp = null;
+        possible_champions = possible_champions.splice(1);
     } else {
         currentLeftChamp = nextLeftChamp;
         currentRightChamp = nextRightChamp;
     
         nextLeftChamp = possible_champions[0];
-        nextRightChamp = possible_champions[1];
+        if(possible_champions.length != 1) {
+            nextRightChamp = possible_champions[1];
+        } else {
+            nextRightChamp = null;
+        }
 
         possible_champions = possible_champions.splice(2);
     }
