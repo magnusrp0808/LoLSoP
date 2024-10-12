@@ -71,7 +71,7 @@ function startGame(){
 
     seedInput = $("#seed").val();
     if(seedInput == null || seedInput == ""){
-        seedInput = Math.floor(Math.random() * 100000000);
+        seedInput = Math.floor(Math.random() * 100000000).toString();
     }
 
     seed = cyrb128(seedInput);
