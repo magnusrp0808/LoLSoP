@@ -4,6 +4,7 @@ var nextLeftChamp = null;
 var nextRightChamp = null;
 
 var options = {
+    include_all_skins: true,
     include_female_champions: true,
     include_male_champions: true,
     include_illegal_champions: false
@@ -208,13 +209,22 @@ async function fetchChampionData(champion){
     
         const json = await response.json();
         
-        return json.data[champion].skins.map(data => {
-            return {
+        if(options.include_all_skins){
+            return json.data[champion].skins.map(data => {
+                return {
+                    id: champion,
+                    name: data.name == 'default' ? json.data[champion].name : data.name,
+                    skin: `${champion}_${data.num}`,
+                };
+            });
+        } else {
+            return [{
                 id: champion,
-                name: data.name == 'default' ? json.data[champion].name : data.name,
-                skin: `${champion}_${data.num}`,
-            };
-        });
+                name: json.data[champion].name,
+                skin: `${champion}_0`,
+            }];
+        }
+
     } catch (error) {
       console.error(error.message);
     }

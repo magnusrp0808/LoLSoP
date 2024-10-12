@@ -28,7 +28,11 @@
         <div id="main-menu">
           <button class="btn btn-primary" onclick="startGame()">Start</button>
           <fieldset>
-            <legend>Options:</legend>      
+            <legend>Options:</legend>    
+            <div>
+              <input type="checkbox" id="include-all-skins" name="include-all-skins" onchange="options.include_all_skins = $(this).is(':checked')" checked/>
+              <label for="include-all-skins">Include all skins</label>
+            </div>  
             <div>
               <input type="checkbox" id="include-males" name="include-males" onchange="options.include_male_champions = $(this).is(':checked')" checked />
               <label for="include-males">Include males</label>
